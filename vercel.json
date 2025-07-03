@@ -6,16 +6,17 @@
       "config": {
         "distDir": "dist"
       }
-    },
-    {
-      "src": "server.js",
-      "use": "@vercel/node"
     }
   ],
+  "functions": {
+    "api/websocket.js": {
+      "maxDuration": 30
+    }
+  },
   "routes": [
     {
-      "src": "/api/(.*)",
-      "dest": "/server.js"
+      "src": "/api/websocket",
+      "dest": "/api/websocket.js"
     },
     {
       "src": "/(.*)",

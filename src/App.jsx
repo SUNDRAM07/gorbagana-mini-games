@@ -89,7 +89,12 @@ const GorbaganaGamingPlatform = () => {
   useEffect(() => {
     if (isConnected && currentUser) {
       // Connect to WebSocket server
-      const ws = new WebSocket('ws://localhost:8080'); // Replace with your server URL
+      const ws = new WebSocket(
+        process.env.NODE_ENV === 'production' 
+          ? 'wss://gorbagana-mini-games.vercel.app/api/websocket'
+          : 'ws://localhost:8080'
+          
+      );
 
       ws.onopen = () => {
         console.log('Connected to server');
@@ -122,8 +127,6 @@ const GorbaganaGamingPlatform = () => {
       };
     }
   }, [isConnected, currentUser]);
-
-
   useEffect(() => {
     const checkConnection = async () => {
       // Check Backpack connection
